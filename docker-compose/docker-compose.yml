@@ -1,5 +1,5 @@
-#tag: 00_00_02 date:19/03/2020
-#Modification de l'extension du fichier en yml + ajout de volume pour le storage public Bookstack
+#tag: 00_00_03 date:21/03/2020
+#Modification du nom du container sysart_bookstack en sysart_web et changement de répertoire pour les deux volumes
 version: '2'
 
 services:
@@ -14,11 +14,11 @@ services:
     - MYSQL_USER=${MYSQL_USER}
     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-    - "/apps/SysArt/volumes/sysart_db:/var/lib/mysql"
+    - "/apps/sysartbookstackmysql/volumes/mysql:/var/lib/mysql"
 
-  sysart_bookstack:
+  sysart_web:
     image: solidnerd/bookstack:0.27.5
-    container_name: sysart_bookstack
+    container_name: sysart_web
     restart: always
     depends_on:
     - sysart_db
@@ -28,7 +28,7 @@ services:
     - DB_USERNAME=${MYSQL_USER}
     - DB_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-    - "/apps/SysArt/volumes/bookstack/uploads:/var/www/bookstack/public/uploads/"
-    - "/apps/SysArt/volumes/bookstack/storage-uploads:/var/www/bookstack/storage/uploads"
+    - "/apps/sysartbookstackmysql/volumes/bookstack/uploads:/var/www/bookstack/public/uploads/"
+    - "/apps/sysartbookstackmysql/volumes/bookstack/storage-uploads:/var/www/bookstack/storage/uploads"
     ports:
     - "6802:80"
