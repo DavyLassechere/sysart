@@ -1,0 +1,32 @@
+#tag: 00_00_01 date:19/03/2020
+version: '2'
+
+services:
+
+  sysart_db:
+    image: mysql:5.7.21
+    container_name: sysart_db
+    restart: always
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+    - "/apps/SysArt/volumes/sysart_db:/var/lib/mysql"
+
+  sysart_bookstack:
+    image: solidnerd/bookstack:0.27.5
+    container_name: sysart_bookstack
+    restart: always
+    depends_on:
+    - sysart_db
+    environment:
+    - DB_HOST=${MYSQL_DATABASE}
+    - DB_DATABASE=${MYSQL_DATABASE}
+    - DB_USERNAME=${MYSQL_USER}
+    - DB_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+    - "/apps/SysArt/volumes/bookstack:/var/www/bookstack/"
+    ports:
+    - "6802:80"
