@@ -1,5 +1,5 @@
-#tag: 00_00_03 date:21/03/2020
-#Modification du nom du container sysart_bookstack en sysart_web et changement de répertoire pour les deux volumes
+#tag: 00_00_05 date:29/03/2020
+#Ajout des paramètres APP_URL et STORAGE_TYPE
 version: '2'
 
 services:
@@ -23,10 +23,12 @@ services:
     depends_on:
     - sysart_db
     environment:
-    - DB_HOST=${MYSQL_DATABASE}
+    - DB_HOST=sysart_db:3306
     - DB_DATABASE=${MYSQL_DATABASE}
     - DB_USERNAME=${MYSQL_USER}
     - DB_PASSWORD=${MYSQL_PASSWORD}
+    - APP_URL="https://sysart.ilteam.fr"
+    - STORAGE_TYPE=local_secure
     volumes:
     - "/apps/sysartbookstackmysql/volumes/bookstack/uploads:/var/www/bookstack/public/uploads/"
     - "/apps/sysartbookstackmysql/volumes/bookstack/storage-uploads:/var/www/bookstack/storage/uploads"
