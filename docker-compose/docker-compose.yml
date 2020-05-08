@@ -1,5 +1,5 @@
-#tag: 00_00_05 date:29/03/2020
-#Ajout des paramètres APP_URL et STORAGE_TYPE
+#tag: 00_00_06 date:12/04/2020
+#Ajout limite de la mémoire
 version: '2'
 
 services:
@@ -8,6 +8,7 @@ services:
     image: mysql:5.7.21
     container_name: sysart_db
     restart: always
+    mem_limit: 254m
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -20,6 +21,7 @@ services:
     image: solidnerd/bookstack:0.27.5
     container_name: sysart_web
     restart: always
+    mem_limit: 254m
     depends_on:
     - sysart_db
     environment:
