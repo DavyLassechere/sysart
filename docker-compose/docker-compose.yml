@@ -1,4 +1,5 @@
-#tag: 00_00_01 date:19/03/2020
+#tag: 00_00_02 date:19/03/2020
+#Modification de l'extension du fichier en yml + ajout de volume pour le storage public Bookstack
 version: '2'
 
 services:
@@ -27,6 +28,7 @@ services:
     - DB_USERNAME=${MYSQL_USER}
     - DB_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-    - "/apps/SysArt/volumes/bookstack:/var/www/bookstack/"
+    - "/apps/SysArt/volumes/bookstack/uploads:/var/www/bookstack/public/uploads/"
+    - "/apps/SysArt/volumes/bookstack/storage-uploads:/var/www/bookstack/storage/uploads"
     ports:
     - "6802:80"
